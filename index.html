@@ -26,6 +26,9 @@
     .option-btn { border:1px solid #94a3b8; padding:7px 13px; border-radius:7px; font-weight:600; background:#f8fafc; }
     .option-active { background:#dcfce7; color:#15803d; border-color:#16a34a; }
     .price-big { font-size: 28px; font-weight: 800; color:#111827; }
+    .stock-badge { position:absolute; top:10px; left:10px; padding:5px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+    .stock-in { background:#dcfce7; color:#15803d; }
+    .stock-out { background:#fee2e2; color:#b91c1c; }
     .blink-notice { animation: blinkNotice 1.2s infinite; }
     @keyframes blinkNotice {
       0%, 100% { opacity: 1; }
@@ -207,6 +210,7 @@ const products = [
     price:150,
     unit:"kg",
     options:[1,5,10,20],
+    stockOut:false,
     img:"images/Himsagor.jpg",
     photos:[
       "images/Himsagor3.jpg",
@@ -222,6 +226,7 @@ const products = [
     price:160,
     unit:"kg",
     options:[1,5,10,20],
+    stockOut:false,
     img:"https://images.unsplash.com/photo-1601493700631-2b16ec4b4716",
     photos:[
       "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716",
@@ -237,6 +242,7 @@ const products = [
     price:150,
     unit:"kg",
     options:[1,5,10,20],
+    stockOut:false,
     img:"images/Amropali.jpg",
     photos:[
       "images/Amropali1.jpg",
@@ -252,6 +258,7 @@ const products = [
     price:1950,
     unit:"kg",
     options:[0.25,0.5,1],
+    stockOut:false,
     img:"images/ghee.jpg",
     photos:[
       "images/ghee1.jpg",
@@ -267,6 +274,7 @@ const products = [
     price:850,
     unit:"kg",
     options:[0.1,0.25,0.5,1],
+    stockOut:false,
     img:"images/holud.jpg",
     photos:[
       "images/holud1.jpg",
@@ -282,6 +290,7 @@ const products = [
     price:650,
     unit:"kg",
     options:[0.1,0.25,0.5,1],
+    stockOut:false,
     img:"images/morich.jpg",
     photos:[
       "images/morich1.jpg",
@@ -297,6 +306,7 @@ const products = [
     price:800,
     unit:"kg",
     options:[0.5,1,2,5],
+    stockOut:false,
     img:"https://images.unsplash.com/photo-1587049352851-8d4e89133924",
     photos:[
       "https://images.unsplash.com/photo-1587049352851-8d4e89133924",
@@ -312,6 +322,7 @@ const products = [
     price:750,
     unit:"kg",
     options:[0.5,1,2,5],
+    stockOut:true,
     img:"https://images.unsplash.com/photo-1471943311424-646960669fbc",
     photos:[
       "https://images.unsplash.com/photo-1471943311424-646960669fbc",
@@ -327,6 +338,7 @@ const products = [
     price:220,
     unit:"kg",
     options:[1,2,5,10],
+    stockOut:false,
     img:"images/maskalai.jpg",
     photos:[
       "images/Maskalai1.jpg",
@@ -342,6 +354,7 @@ const products = [
     price:150,
     unit:"kg",
     options:[1,2,5,10],
+    stockOut:false,
     img:"images/mosur.jpg",
     photos:[
       "images/mosur1.jpg",
@@ -357,6 +370,7 @@ const products = [
     price:600,
     unit:"kg",
     options:[0.1,0.25,0.5,1],
+    stockOut:true,
     img:"images/kalijira.jpeg",
     photos:[
       "images/kalijira1.jpg",
@@ -384,7 +398,8 @@ function renderProducts(){
     ).join("");
 
     grid.innerHTML += `
-      <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+      <div class="relative bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <span class="stock-badge ${p.stockOut ? 'stock-out' : 'stock-in'}">${p.stockOut ? 'Stock Out' : 'Available'}</span>
         <img src="${p.img}" onclick="showProduct(${p.id})" class="w-full product-card-img cursor-pointer" alt="${p.shortName}" />
         <div class="p-3">
           <h3 onclick="showProduct(${p.id})" class="font-bold cursor-pointer">${p.shortName}</h3>
@@ -427,6 +442,7 @@ function clearGridActive(id){
 
 function addGridToCart(id){
   const p = products.find(x=>x.id===id);
+  if(p.stockOut) return alert(`${p.shortName} is currently Stock Out. Please contact us for availability.`);
   const weight = parseFloat(document.getElementById(`grid-weight-${id}`).value);
   if(!weight || weight <= 0) return alert("Please enter weight / quantity");
 
@@ -541,6 +557,7 @@ function changeOrderWeight(amount){
 
 function addSelectedToCart(){
   if(!selectedProduct) return alert("Please select a product first");
+  if(selectedProduct.stockOut) return alert(`${selectedProduct.shortName} is currently Stock Out. Please contact us for availability.`);
 
   const weight = parseFloat(document.getElementById("order-weight").value);
   if(!weight || weight <= 0) return alert("Please enter weight");
