@@ -20,6 +20,9 @@
     }
     html { scroll-behavior: smooth; }
     .thumb-active { outline: 3px solid #0ea5e9; }
+    .product-card-img { height: 260px; object-fit: contain; background: #ffffff; padding: 18px; }
+    .detail-main-img { height: 420px; object-fit: contain; background: #ffffff; padding: 18px; }
+    .thumb-img { object-fit: contain; background: #ffffff; padding: 6px; }
     .blink-notice { animation: blinkNotice 1.2s infinite; }
     @keyframes blinkNotice {
       0%, 100% { opacity: 1; }
@@ -90,7 +93,7 @@
 <section id="order" class="max-w-6xl mx-auto p-4 hidden">
   <div class="bg-white rounded-xl shadow p-4 grid md:grid-cols-2 gap-6">
     <div>
-      <img id="detail-img" onclick="openZoom()" class="w-full h-48 object-cover rounded-lg cursor-zoom-in" alt="Product image" />
+      <img id="detail-img" onclick="openZoom()" class="w-full detail-main-img rounded-lg cursor-zoom-in border" alt="Product image" />
       <div id="detail-thumbs" class="grid grid-cols-3 gap-2 mt-3"></div>
       <p class="text-xs text-gray-500 mt-1">ছবিতে ক্লিক করলে zoom হবে</p>
     </div>
@@ -364,7 +367,7 @@ function renderProducts(){
   products.forEach(p=>{
     grid.innerHTML += `
       <div onclick="showProduct(${p.id})" class="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer overflow-hidden">
-        <img src="${p.img}" class="w-full h-40 object-cover" alt="${p.shortName}" />
+        <img src="${p.img}" class="w-full product-card-img" alt="${p.shortName}" />
         <div class="p-3">
           <h3 class="font-bold">${p.shortName}</h3>
           <p class="text-sky-700 font-semibold">${p.price} Tk/${p.unit || 'kg'}</p>
@@ -404,7 +407,7 @@ function renderThumbs(product){
 
   photos.forEach((photo, index)=>{
     thumbs.innerHTML += `
-      <img src="${photo}" onclick="changePhoto('${photo}', this)" class="h-20 w-full object-cover rounded cursor-pointer ${index === 0 ? 'thumb-active' : ''}" alt="Product thumbnail" />
+      <img src="${photo}" onclick="changePhoto('${photo}', this)" class="h-20 w-full thumb-img rounded cursor-pointer border ${index === 0 ? 'thumb-active' : ''}" alt="Product thumbnail" />
     `;
   });
 }
