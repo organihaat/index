@@ -34,9 +34,13 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.35; }
     }
-      .menu-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 10px; border-bottom:3px solid transparent; }
+      .menu-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:6px 6px; border-bottom:3px solid transparent; }
     .menu-item:hover { color:#15803d; border-bottom-color:#16a34a; }
-    .menu-icon { width:26px; height:26px; }
+    .menu-icon { width:22px; height:22px; }
+    @media (min-width: 768px){
+      .menu-item { padding:8px 10px; }
+      .menu-icon { width:26px; height:26px; }
+    }
   </style>
 </head>
 <body class="bg-sky-50 text-gray-800">
@@ -48,31 +52,31 @@
       <img src="logo.png" class="h-14 md:h-24 w-auto rounded" alt="OrganiHat Logo" />
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 font-medium text-green-800">
-      <a href="#home" class="menu-item">
+    <nav class="flex items-center gap-3 sm:gap-5 md:gap-8 font-medium text-green-800">
+      <a href="#home" class="menu-item text-xs md:text-base">
         <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 11h3v10h6v-6h2v6h6V11h3L12 3z"/></svg>
         <span>Home</span>
       </a>
 
       <div class="relative group">
-        <button class="menu-item">
+        <button class="menu-item text-xs md:text-base">
           <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
           <span>Products ▾</span>
         </button>
         <div id="product-dropdown" class="hidden group-hover:block absolute bg-white text-gray-800 shadow-lg rounded mt-2 min-w-52 overflow-hidden z-50"></div>
       </div>
 
-      <a href="#products" class="menu-item">
+      <a href="#products" class="menu-item text-xs md:text-base">
         <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg>
         <span>Categories</span>
       </a>
 
-      <button onclick="showAboutModal()" class="menu-item">
+      <button onclick="showAboutModal()" class="menu-item text-xs md:text-base hidden md:flex">
         <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></svg>
         <span>About Us</span>
       </button>
 
-      <button onclick="showContactModal()" class="menu-item">
+      <button onclick="showContactModal()" class="menu-item text-xs md:text-base hidden md:flex">
         <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.61 22 2 13.39 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z"/></svg>
         <span>Contact</span>
       </button>
@@ -83,7 +87,7 @@
         <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
       </button>
 
-      <a href="https://facebook.com/organihat" target="_blank" class="text-blue-600 p-1 md:p-2 hover:bg-blue-50 rounded-full" title="Facebook Page">
+      <a href="https://facebook.com/organihat" target="_blank" class="hidden md:block text-blue-600 p-1 md:p-2 hover:bg-blue-50 rounded-full" title="Facebook Page">
         <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
       </a>
 
