@@ -34,6 +34,9 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.35; }
     }
+      .menu-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 10px; border-bottom:3px solid transparent; }
+    .menu-item:hover { color:#15803d; border-bottom-color:#16a34a; }
+    .menu-icon { width:26px; height:26px; }
   </style>
 </head>
 <body class="bg-sky-50 text-gray-800">
@@ -45,25 +48,62 @@
       <img src="logo.png" class="h-24 w-auto rounded" alt="OrganiHat Logo" />
     </a>
 
-    <nav class="hidden md:flex items-center gap-6 font-medium">
-      <a href="#home" class="hover:text-sky-700">Home</a>
+    <nav class="hidden md:flex items-center gap-8 font-medium text-green-800">
+      <a href="#home" class="menu-item">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 11h3v10h6v-6h2v6h6V11h3L12 3z"/></svg>
+        <span>Home</span>
+      </a>
+
       <div class="relative group">
-        <button class="hover:text-sky-700">Products ▾</button>
-        <div id="product-dropdown" class="hidden group-hover:block absolute bg-white text-gray-800 shadow-lg rounded mt-2 min-w-48 overflow-hidden"></div>
+        <button class="menu-item">
+          <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          <span>Products ▾</span>
+        </button>
+        <div id="product-dropdown" class="hidden group-hover:block absolute bg-white text-gray-800 shadow-lg rounded mt-2 min-w-52 overflow-hidden z-50"></div>
       </div>
-      <button onclick="showContactModal()" class="hover:text-sky-700">Contact</button>
-      <button onclick="showAboutModal()" class="hover:text-sky-700">About Us</button>
+
+      <a href="#products" class="menu-item">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg>
+        <span>Categories</span>
+      </a>
+
+      <button onclick="showAboutModal()" class="menu-item">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z"/></svg>
+        <span>About Us</span>
+      </button>
+
+      <button onclick="showContactModal()" class="menu-item">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.61 22 2 13.39 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z"/></svg>
+        <span>Contact</span>
+      </button>
     </nav>
 
-    <button onclick="toggleCart()" class="relative text-sky-700 px-3 py-2 flex flex-col items-center justify-center min-w-[60px]">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="9" cy="21" r="1"></circle>
-        <circle cx="20" cy="21" r="1"></circle>
-        <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L23 6H6"></path>
-      </svg>
-      <span class="text-xs font-bold mt-1">Cart</span>
-      <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-white shadow">0</span>
-    </button>
+    <div class="flex items-center gap-3">
+      <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" class="text-green-800 p-2 hover:bg-green-50 rounded-full" title="Search Products">
+        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      </button>
+
+      <a href="https://facebook.com/organihat" target="_blank" class="text-blue-600 p-2 hover:bg-blue-50 rounded-full" title="Facebook Page">
+        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+      </a>
+
+      <a href="tel:01916161616" class="flex items-center gap-2 text-gray-800 px-2 md:px-3 py-2 font-semibold whitespace-nowrap">
+        <div class="bg-orange-100 p-2 rounded-full text-orange-500 shrink-0">
+          <svg class="h-4 w-4 md:h-5 md:w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.61 22 2 13.39 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z"/></svg>
+        </div>
+        <span class="text-sm md:text-base tracking-wide">01916-161616</span>
+      </a>
+
+      <button onclick="toggleCart()" class="relative text-green-800 px-3 py-2 flex flex-col items-center justify-center min-w-[60px]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L23 6H6"></path>
+        </svg>
+        <span class="text-xs font-bold mt-1">Cart</span>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-white shadow">0</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -181,7 +221,7 @@
 
 <!-- Footer -->
 <footer class="bg-sky-100 text-sky-900 mt-10">
-  <div class="max-w-6xl mx-auto p-5 grid md:grid-cols-3 gap-4 text-sm">
+  <div class="max-w-6xl mx-auto p-5 grid md:grid-cols-4 gap-4 text-sm">
     <div>
       <h3 class="font-bold text-lg">অর্গানিহাট</h3>
       <p>শুদ্ধতার প্রতিশ্রুতি</p>
@@ -196,6 +236,19 @@
       <h3 class="font-bold">Contact</h3>
       <p>01916-161616</p>
       <p>organihat@gmail.com</p>
+    </div>
+    <div>
+      <h3 class="font-bold">Follow Us</h3>
+      <div class="flex gap-3 mt-2">
+        <a href="https://facebook.com/organihat" target="_blank" class="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+          Facebook
+        </a>
+        <a href="https://youtube.com/" target="_blank" class="flex items-center gap-2 bg-red-600 text-white px-3 py-2 rounded">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg>
+          YouTube
+        </a>
+      </div>
     </div>
   </div>
   <p class="text-center text-xs pb-3">© 2026 OrganiHat. All Rights Reserved.</p>
